@@ -8,8 +8,10 @@
     <p align='center'>
     <img src='https://user-images.githubusercontent.com/50035229/224493411-085ba405-81cd-4972-b87b-74a2e811f23d.png' alt='语音对话' width='800'/>
     <img src='https://user-images.githubusercontent.com/50035229/223590381-ed38db74-39f3-4e77-bd3a-aaa54d679286.png' alt='角色扮演' width='800'/>
+    <img src='https://user-images.githubusercontent.com/50035229/228092540-bb9c74de-fccb-4d07-9797-f3fe1fb3705a.png' alt='角色列表' width='800'/>
     <img src='https://user-images.githubusercontent.com/50035229/223590817-37a56eac-ab6e-4293-862a-de0988ac50b7.png' alt='文字成图' width='800'/>
     <img src='https://user-images.githubusercontent.com/50035229/224531308-378a5bc3-2964-4e32-905f-8237dafc3f91.png' alt='图片变体' width='800'/>
+    <img src='https://user-images.githubusercontent.com/50035229/227900488-10a53176-f4e3-4b9e-bf9e-b60d958aefc8.png' alt='余额查询' width='800'/>
     <img src='https://user-images.githubusercontent.com/50035229/224531775-3f0e1e1b-a373-4774-a8f0-e120ccba6670.png' alt='帮助菜单' width='800'/>
     </p>
 
@@ -24,14 +26,15 @@
     🚀 Feishu OpenAI 🚀
 </p>
 
-
 ## 👻 机器人功能
 
-🗣 语音交流：私人直接与机器人畅所欲言 
+🗣 语音交流：私人直接与机器人畅所欲言
 
 💬 多话题对话：支持私人和群聊多话题讨论，高效连贯
 
 🖼 文本成图：支持文本成图和以图搜图
+
+🛖 场景预设：内置丰富场景列表，一键切换AI角色
 
 🎭 角色扮演：支持场景模式，增添讨论乐趣和创意
 
@@ -43,7 +46,7 @@
 
 👍 交互式反馈：即时获取机器人处理结果
 
-🏞 场景预设：内置丰富场景预设，方便用户管理场景 🚧
+🎰 余额查询：即时获取token消耗情况
 
 🔙 历史回档：轻松回档历史对话，继续话题讨论 🚧
 
@@ -59,12 +62,15 @@
 
 📊 表格分析：轻松导入飞书表格，提升数据分析效率 🚧
 
+🍊 私有数据训练：利用公司产品信息对GPT二次训练，更好地满足客户个性化需求 🚧
 
 ## 🌟 项目特点
 
-- 🍏 基于 OpenAI-[gpt-3.5-turbo](https://platform.openai.com/account/api-keys) 接口
-- 🍎 通过 lark，将 ChatGPT 接入[飞书](https://open.feishu.cn/app)
-- 🥒 支持[Serverless 云函数](https://github.com/serverless-devs/serverless-devs)、[本地环境](https://dashboard.cpolar.com/login)、[Docker](https://www.docker.com/)、[二进制安装包](https://github.com/Leizhenpeng/feishu-chatgpt/releases/)多种渠道部署
+- 🍏 对话基于 OpenAI-[gpt-3.5-turbo](https://platform.openai.com/account/api-keys) 接口
+- 🍎 通过 lark，将 ChatGPT 接入[飞书](https://open.feishu.cn/app)和[飞书国际版](https://www.larksuite.com/)
+- 🥒
+  支持[Serverless 云函数](https://github.com/serverless-devs/serverless-devs)、[本地环境](https://dashboard.cpolar.com/login)、[Docker](https://www.docker.com/)、[二进制安装包](https://github.com/Leizhenpeng/feishu-chatgpt/releases/)
+  等多种渠道部署
 - 🍋 基于[goCache](https://github.com/patrickmn/go-cache)内存键值对缓存
 
 ## 项目部署
@@ -209,7 +215,8 @@ s deploy
     <summary>使用 Railway 平台一键部署</summary>
 
 
-Railway 是一家国外的 Serverless 平台，支持多种语言，可以一键将 Github 上的代码仓库部署到 Railway 平台，然后在 Railway 平台上配置环境变量即可。部署本项目的流程如下：
+Railway 是一家国外的 Serverless 平台，支持多种语言，可以一键将 Github 上的代码仓库部署到 Railway 平台，然后在 Railway
+平台上配置环境变量即可。部署本项目的流程如下：
 
 #### 1. 生成 Railway 项目
 
@@ -230,7 +237,8 @@ Railway 是一家国外的 Serverless 平台，支持多种语言，可以一键
 
 <img src='https://user-images.githubusercontent.com/50035229/225006236-57cb3c8a-1b7d-4bfe-9c9b-099cb9179027.png' alt='Railway 域名' width='500px'/>
 
-如果不确定自己部署是否成功，可以通过访问上述获取到的域名 (https://xxxxxxxx.railway.app/ping) 来查看是否返回了`pong`，如果返回了`pong`，说明部署成功。
+如果不确定自己部署是否成功，可以通过访问上述获取到的域名 (https://xxxxxxxx.railway.app/ping) 来查看是否返回了`pong`
+，如果返回了`pong`，说明部署成功。
 
 </details>
 
@@ -251,11 +259,14 @@ docker run -d --name feishu-chatgpt -p 9000:9000 \
 --env HTTP_PROXY="" \
 feishu-chatgpt:latest
 ```
+
 注意:
+
 - `BOT_NAME` 为飞书机器人名称，例如 `chatGpt`
 - `OPENAI_KEY` 为openai key，多个key用逗号分隔，例如 `sk-xxx1,sk-xxx2,sk-xxx3`
 - `HTTP_PROXY` 为宿主机的proxy地址，例如 `http://host.docker.internal:7890`,没有代理的话，可以不用设置
 - `API_URL` 为openai api 接口地址，例如 `https://api.openai.com`, 没有反向代理的话，可以不用设置
+
 ---
 
 小白简易化 docker 部署
@@ -284,11 +295,34 @@ dockerproxy.com/leizhenpeng/feishu-chatgpt:latest
 </details>
 
 <details>
+    <summary>docker-compose 部署</summary>
+<br>
+
+编辑 docker-compose.yaml，通过 environment 配置相应环境变量（或者通过 volumes 挂载相应配置文件），然后运行下面的命令即可
+
+```bash
+# 构建镜像
+docker compose build
+
+# 启动服务
+docker compose up -d
+
+# 停止服务
+docker compose down
+```
+
+事件回调地址: http://IP:9000/webhook/event
+卡片回调地址: http://IP:9000/webhook/card
+
+</details>
+
+<details>
     <summary>二进制安装包部署</summary>
 <br>
 
 1. 进入[release 页面](https://github.com/Leizhenpeng/feishu-chatgpt/releases/) 下载对应的安装包
-2. 解压安装包,修改 config.example.yml 中配置信息,另存为 config.yml
+2. 解压安装包,修改 config.example.yml 中配置信息,另存为 config.yaml
+3. 目录下添加文件 `role_list.yaml`，自定义角色，可以从这里获取：[链接](https://github.com/Leizhenpeng/feishu-chatgpt/blob/master/code/role_list.yaml)
 3. 运行程序入口文件 `feishu-chatgpt`
 
 事件回调地址: http://IP:9000/webhook/event
@@ -318,32 +352,31 @@ dockerproxy.com/leizhenpeng/feishu-chatgpt:latest
     </p>
 </details>
 
-
 - 获取 [OpenAI](https://platform.openai.com/account/api-keys) 的 KEY
 - 创建 [飞书](https://open.feishu.cn/) 机器人
-  1. 前往[开发者平台](https://open.feishu.cn/app?lang=zh-CN)创建应用,并获取到 APPID 和 Secret
-  2. 前往`应用功能-机器人`, 创建机器人
-  3. 从 cpolar、serverless 或 Railway 获得公网地址，在飞书机器人后台的 `事件订阅` 板块填写。例如，
-     - `http://xxxx.r6.cpolar.top`为 cpolar 暴露的公网地址
-     - `/webhook/event`为统一的应用路由
-     - 最终的回调地址为 `http://xxxx.r6.cpolar.top/webhook/event`
-  4. 在飞书机器人后台的 `机器人` 板块，填写消息卡片请求网址。例如，
-     - `http://xxxx.r6.cpolar.top`为 cpolar 暴露的公网地址
-     - `/webhook/card`为统一的应用路由
-     - 最终的消息卡片请求网址为 `http://xxxx.r6.cpolar.top/webhook/card`
-  5. 在事件订阅板块，搜索三个词`机器人进群`、 `接收消息`、 `消息已读`, 把他们后面所有的权限全部勾选。
-  进入权限管理界面，搜索`图片`, 勾选`获取与上传图片或文件资源`。
-  最终会添加下列回调事件
-     - im:resource(获取与上传图片或文件资源)
-     - im:message
-     - im:message.group_at_msg(获取群组中所有消息)
-     - im:message.group_at_msg:readonly(接收群聊中@机器人消息事件)
-     - im:message.p2p_msg(获取用户发给机器人的单聊消息)
-     - im:message.p2p_msg:readonly(读取用户发给机器人的单聊消息)
-     - im:message:send_as_bot(获取用户在群组中@机器人的消息)
-     - im:chat:readonly(获取群组信息)
-     - im:chat(获取与更新群组信息)
- 
+    1. 前往[开发者平台](https://open.feishu.cn/app?lang=zh-CN)创建应用,并获取到 APPID 和 Secret
+    2. 前往`应用功能-机器人`, 创建机器人
+    3. 从 cpolar、serverless 或 Railway 获得公网地址，在飞书机器人后台的 `事件订阅` 板块填写。例如，
+        - `http://xxxx.r6.cpolar.top`为 cpolar 暴露的公网地址
+        - `/webhook/event`为统一的应用路由
+        - 最终的回调地址为 `http://xxxx.r6.cpolar.top/webhook/event`
+    4. 在飞书机器人后台的 `机器人` 板块，填写消息卡片请求网址。例如，
+        - `http://xxxx.r6.cpolar.top`为 cpolar 暴露的公网地址
+        - `/webhook/card`为统一的应用路由
+        - 最终的消息卡片请求网址为 `http://xxxx.r6.cpolar.top/webhook/card`
+    5. 在事件订阅板块，搜索三个词`机器人进群`、 `接收消息`、 `消息已读`, 把他们后面所有的权限全部勾选。
+       进入权限管理界面，搜索`图片`, 勾选`获取与上传图片或文件资源`。
+       最终会添加下列回调事件
+        - im:resource(获取与上传图片或文件资源)
+        - im:message
+        - im:message.group_at_msg(获取群组中所有消息)
+        - im:message.group_at_msg:readonly(接收群聊中@机器人消息事件)
+        - im:message.p2p_msg(获取用户发给机器人的单聊消息)
+        - im:message.p2p_msg:readonly(读取用户发给机器人的单聊消息)
+        - im:message:send_as_bot(获取用户在群组中@机器人的消息)
+        - im:chat:readonly(获取群组信息)
+        - im:chat(获取与更新群组信息)
+
 
 5. 发布版本，等待企业管理员审核通过
 
